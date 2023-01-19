@@ -4,11 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Meme Generator</title>
 </head>
 <body>
-    <h1>A website to generate memes</h1>
-    <!-- There should be a for loop here tha that helps you go through each of the 10 memes -->
-        <p><img src="{{memes['meme-url']}}" alt=""></p>
+    <h1 class="center">A website to generate memes</h1>
+    <!-- This is the list of memes -->
+    {% if memes|length < 1 %}
+        <h4 style="text-align: center">There are no memes. Create one below!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Meme</th>
+            <th>Added</th>
+        </tr>
+        {% for meme in memes %}
+            <tr>
+                <td><img src="{{ meme.img_src }}" class="resize-image"  alt=""></td>
+                <td>{{ meme.date_created.date() }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <div class="form center">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Add Meme Url">
+        </form>
+    </div>
 </body> 
 </html>
