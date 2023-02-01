@@ -21,6 +21,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 # This function will load our website naked. Meaning nothing behind the /. 
@@ -47,17 +48,21 @@ def sign_up():
         user_username = request.form['username']
         user_password = request.form['password']
         new_user = User(username=user_username, password=user_password)
-
+        
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect('/')
+            return redirect('/users')
         except:
             return 'There was an issue adding your User'
     else:
-        users = User.query.order_by(User.date_created).all()
-        return render_template('users.html', users=users)
+        return render_template('sign_up.html')
 
+
+@app.route('/users', methods=["GET"])
+def users():
+    users = User.query.order_by(User.date_created).all()
+    return render_template('users.html', users=users)
 
 # This line will run our server on this port 80
 if (__name__ == "__main__"):
