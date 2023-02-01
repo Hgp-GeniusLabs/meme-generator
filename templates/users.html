@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <!-- This is the list of memes -->
+    {% if users|length < 1 %}
+        <h4 style="text-align: center">There are no users. Create one below!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>User</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td><img src="{{ user.username }}" class="resize-image"  alt=""></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

@@ -17,6 +17,12 @@ class Meme(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(100), nullable=False)
+
+
 # This function will load our website naked. Meaning nothing behind the /. 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -34,6 +40,23 @@ def index():
     else:
         memes = Meme.query.order_by(Meme.date_created).all()
         return render_template('index.html', memes=memes)
+
+@app.route('/sign-up', methods=['POST', 'GET'])
+def sign_up():
+    if request.method == 'POST':
+        user_username = request.form['username']
+        user_password = request.form['password']
+        new_user = User(username=user_username, password=user_password)
+
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue adding your User'
+    else:
+        users = User.query.order_by(User.date_created).all()
+        return render_template('users.html', users=users)
 
 
 # This line will run our server on this port 80
