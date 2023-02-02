@@ -29,7 +29,7 @@ class User(db.Model):
 def index():
     if request.method == 'POST':
         meme_content = request.form['content']
-        new_meme = Meme(content=meme_content)
+        new_meme = Meme(img_src=meme_content)
 
         try:
             db.session.add(new_meme)
