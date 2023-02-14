@@ -12,13 +12,25 @@
 </head>
 
 <body>
-    <h1 class="center">A website to generate memes</h1>
+    <header>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/sign-up">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users">Users Directory</a>
+            </li>
+        </ul>
+    </header>
+    <a href="/">
+        <h1 class="text-center my-4">A website to generate memes</h1>
+    </a>  
 
     <!-- We want to show this form at the top -->
     <div class="form center">
         <form action="/" method="POST">
-            <input type="text" name="content" id="content">
-            <input type="submit" value="Add Meme Url">
+            <input type="text" name="content" id="content" class="new-meme-input">
+            <input type="submit" value="Add Meme Url" class="btn btn-primary">
         </form>
     </div>
 

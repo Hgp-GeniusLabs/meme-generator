@@ -42,3 +42,8 @@ td {
     width: 400px;
     height: auto;
 }
+
+/* adding css for padding the input */
+.new-meme-input {
+    padding: .4em;
+}
