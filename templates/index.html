@@ -9,6 +9,19 @@
 </head>
 <body>
     <h1 class="center">A website to generate memes</h1>
+
+    <!-- We want to show this form at the top -->
+    <div class="form center">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Add Meme Url">
+        </form>
+    </div>
+
+    <!-- Add space between the form and memes -->
+    <br> 
+
+    
     <!-- This is the list of memes -->
     {% if memes|length < 1 %}
         <h4 style="text-align: center">There are no memes. Create one below!</h4>
@@ -26,11 +39,5 @@
         {% endfor %}
     </table>
     {% endif %}
-    <div class="form center">
-        <form action="/" method="POST">
-            <input type="text" name="content" id="content">
-            <input type="submit" value="Add Meme Url">
-        </form>
-    </div>
 </body> 
 </html>
