@@ -22,7 +22,6 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
-
 # This function will load our website naked. Meaning nothing behind the /. 
 @app.route('/', methods=['POST', 'GET'])
 def index():
