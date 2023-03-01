@@ -10,12 +10,13 @@ app.config['SECRET_KEY'] = 'thisisasecretkey'
 db = SQLAlchemy()
 db.init_app(app)
 
-# Create the meme model 
+# Create the Meme model
 class Meme(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     img_src = db.Column(db.String(100), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
+# Create User Model - NEW CODE
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
@@ -32,7 +33,7 @@ def index():
         try:
             db.session.add(new_meme)
             db.session.commit()
-            return redirect('/')
+            return redirect('/') 
         except:
             return 'There was an issue adding your Meme into the database.'
 
@@ -40,6 +41,7 @@ def index():
         memes = Meme.query.order_by(Meme.date_created).all()
         return render_template('index.html', memes=memes)
 
+# This is the new user sign up page function - NEW CODE
 @app.route('/sign-up', methods=['POST', 'GET'])
 def sign_up():
     if request.method == 'POST':
@@ -56,6 +58,7 @@ def sign_up():
     else:
         return render_template('sign_up.html')
 
+# This is going to list all existing users from database - NEW CODE 
 @app.route('/users', methods=["GET"])
 def users():
     users = User.query.order_by(User.date_created).all()
@@ -63,7 +66,7 @@ def users():
 
 
 
-# This line will run our server on this port 80
+# This is how you run your server
 if (__name__ == "__main__"):
     app.run(debug=True)
 
